@@ -51,6 +51,7 @@ class Multiplicative(Offer):
         q, r = divmod(cnt_sku[self.sku], self.multiplier)
         price_so_far = q * self.offer_price
         cnt_sku[self.sku] = r
+        return cnt_sku, price_so_far
 
 
 class BuyXgetY(Offer):
@@ -62,7 +63,11 @@ class BuyXgetY(Offer):
         self.discount = price_table[sku_y] * y_cnt
 
     def apply(self, cnt_sku):
-        pass
+        q, r = divmod(cnt_sku[self.sku], self.multiplier)
+        applied_times = min(q, cnt_sku[self.sku_y])
+        price_so_far = q * self.offer_price
+        cnt_sku[self.sku] = r
+        cnt_sku
 
 
 offers = sorted([Multiplicative('A', 1, 50),
@@ -99,5 +104,6 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
