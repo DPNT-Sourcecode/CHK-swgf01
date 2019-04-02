@@ -31,24 +31,34 @@ price_table = {
     'E': 40
 }
 
+
 class Offer:
-    pass
+    def __init__(self):
+        self.discount = 0
 
 
 class Multiplicative(Offer):
-    def __init__(self, sku, multiplier, price):
+    def __init__(self, sku, multiplier, offer_price):
         self.sku = sku
         self.multiplier = multiplier
-        self.price = price
-        self.discount
+        self.offer_price = offer_price
+        self.discount = price_table[sku] * multiplier - offer_price
 
     def apply(self, cnt_sku):
         pass
+
 
 class BuyXgetY(Offer):
     def __init__(self, sku_x, multiplier, sku_y, y_cnt):
         self.sku = sku_x
         self.multiplier = multiplier
+        self.sku_y = sku_y
+        self.y_cnt = y_cnt
+        self.discount = price_table[sku_y] * y_cnt
+
+    def apply(self, cnt_sku):
+        pass
+
 
 def checkout(skus):
     try:
@@ -72,6 +82,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
