@@ -52,21 +52,14 @@ price_string = \
 | Y    | 10    |                        |
 | Z    | 50    |                        |
 """
+price_table = {}
 
-price_table = [ column.strip()
-                for column in (line.split('|')
-                for line in price_string.splitlines())]
+for line in price_string.splitlines():
+    for column in line.split('|'):
+        print(column)
+
 
 print(price_table)
-
-price_table = {
-    'A': 50,
-    'B': 30,
-    'C': 20,
-    'D': 15,
-    'E': 40,
-    'F': 10
-}
 
 
 class Offer:
@@ -149,5 +142,6 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
