@@ -41,11 +41,12 @@ def make_pricetable(price_string):
 
 
 def make_special_offers(price_string):
-    patternm = re.compile("(\d+)(.) for (\d+)")
-    patternb = re.compile(r"(\d)+(.) get one (.) free")
+    patternm = re.compile(r"(\d+)(.) for (\d+)")
+    patternb = re.compile(r"(\d+)(.) get one (.) free")
 
-    groups = patternm.match(price_string)
-    print(groups)
+    groupsm = patternm.findall(price_string)
+    groupsb = patternb.findall(price_string)
+    print(groupsb)
 
 make_special_offers(price_string)
 
@@ -132,6 +133,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
