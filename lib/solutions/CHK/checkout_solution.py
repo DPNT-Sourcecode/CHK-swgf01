@@ -27,9 +27,18 @@ SKU = namedtuple('SKU', 'unit_price offer_multiplier offer_price')
 
 
 class Offer:
-    pass
+    def apply(self, sku_cnt):
+        return sku_cnt, 0
 
 
+class Multiplicative(Offer):
+    def __init__(self, sku, multiplier, price):
+        self.sku = sku
+        self.multiplier = multiplier
+        self.price = price
+
+    def apply(self, cnt_sku):
+        pass
 
 price_table = {
     'A': SKU(50, 3, 130),
@@ -61,4 +70,5 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
