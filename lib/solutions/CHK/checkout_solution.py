@@ -21,11 +21,7 @@ Notes:
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-from collections import namedtuple, defaultdict
-
-price_string = \
-"""
-| A    | 50    | 3A for 130, 5A for 200 |
+price_string = """| A    | 50    | 3A for 130, 5A for 200 |
 | B    | 30    | 2B for 45              |
 | C    | 20    |                        |
 | D    | 15    |                        |
@@ -50,17 +46,14 @@ price_string = \
 | W    | 20    |                        |
 | X    | 90    |                        |
 | Y    | 10    |                        |
-| Z    | 50    |                        |
-"""
+| Z    | 50    |                        |"""
 price_table = {}
 
 for line in price_string.splitlines():
-    for column in line.split('|'):
-        print(column)
-
-
-print(price_table)
-
+    columns = line.split('|')
+    sku = columns[1].strip()
+    price = int(columns[2].strip())
+    price_table[sku] = price
 
 class Offer:
     def __init__(self):
@@ -142,6 +135,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
