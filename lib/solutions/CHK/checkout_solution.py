@@ -48,7 +48,9 @@ class Multiplicative(Offer):
         self.discount = price_table[sku] * multiplier - offer_price
 
     def apply(self, cnt_sku):
-        pass
+        q, r = divmod(cnt_sku[self.sku], self.multiplier)
+        price_so_far = q * self.offer_price
+        cnt_sku[self.sku] = r
 
 
 class BuyXgetY(Offer):
@@ -97,4 +99,5 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
