@@ -72,6 +72,13 @@ class BuyXgetY(Offer):
         return cnt_sku, price_so_far
 
 
+class BuyXgetX(Multiplicative):
+    def __init__(self, sku, multiplier, cnt):
+        new_multiplier = multiplier + cnt
+        offer_price = multiplier * price_table[sku]
+        super(BuyXgetX, self).__init__(sku, new_multiplier, offer_price)
+
+
 offers = sorted([Multiplicative('A', 1, 50),
                  Multiplicative('A', 3, 130),
                  Multiplicative('A', 5, 200),
@@ -82,7 +89,7 @@ offers = sorted([Multiplicative('A', 1, 50),
                  Multiplicative('E', 1, 40),
                  BuyXgetY('E', 2, 'B', 1),
                  Multiplicative('F', 1, 10),
-                 Multiplicative('F', 3, 20)], key=lambda o: o.discount, reverse=True)
+                 BuyXgetX('F', 2, 1)], key=lambda o: o.discount, reverse=True)
 
 print(offers)
 
@@ -106,5 +113,6 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
