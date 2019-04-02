@@ -65,9 +65,10 @@ class BuyXgetY(Offer):
     def apply(self, cnt_sku):
         q, r = divmod(cnt_sku[self.sku], self.multiplier)
         applied_times = min(q, cnt_sku[self.sku_y])
-        price_so_far = q * self.offer_price
-        cnt_sku[self.sku] = r
-        cnt_sku
+        price_so_far = applied_times * self.multiplier * price_table[self.sku]
+        cnt_sku[self.sku] -= applied_times * self.multiplier
+        cnt_sku[self.sku_y] -= applied_times * self.y_cnt
+        return cnt_sku, price_so_far
 
 
 offers = sorted([Multiplicative('A', 1, 50),
@@ -93,17 +94,16 @@ def checkout(skus):
             else:
                 sku_cnt[sku] += 1
         total_price = 0
-        # Given number of individual items apply special offer and calculate
+        # Given number of individual items apply offers and calculate
         # items price
-        for sku, n in sku_cnt.items():
-            q, r = divmod(n, price_table[sku].offer_multiplier)
-            sku_total = q * price_table[sku].offer_price + \
-                        r * price_table[sku].unit_price
-            total_price += sku_total
+        for offer in offers:
+            sku_cnt, price = offer.apply(sku_cnt)
+            total_price += price
         return total_price
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
