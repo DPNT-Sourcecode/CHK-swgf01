@@ -42,7 +42,6 @@ class TestCHK:
         assert checkout_solution.checkout("AAAAA") == 200
         assert checkout_solution.checkout("AAAAAA") == 200 + 50
         assert checkout_solution.checkout("AAAAAAA") == 200 + 50 * 2
-        assert checkout_solution.checkout("AAAAAAA") == 200 + 130
         assert checkout_solution.checkout('BB') == 45
         assert checkout_solution.checkout('BBB') == 45 + 30
         assert checkout_solution.checkout('BBBB') == 90

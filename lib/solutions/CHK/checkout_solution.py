@@ -78,7 +78,7 @@ offers = sorted([Multiplicative('A', 1, 50),
                  Multiplicative('B', 2, 45),
                  Multiplicative('C', 1, 20),
                  Multiplicative('D', 1, 15),
-                 Multiplicative('A', 1, 40),
+                 Multiplicative('E', 1, 40),
                  BuyXgetY('E', 2, 'B', 1)], key=lambda o: o.discount, reverse=True)
 
 print(offers)
@@ -103,6 +103,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
