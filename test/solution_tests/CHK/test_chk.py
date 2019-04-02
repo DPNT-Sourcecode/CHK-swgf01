@@ -56,4 +56,3 @@ class TestCHK:
 
     def test_e_offer(self):
         assert checkout_solution.checkout("ABCDEE") == 50 + 30 + 20 + 15 + 40 * 2 - 30
-

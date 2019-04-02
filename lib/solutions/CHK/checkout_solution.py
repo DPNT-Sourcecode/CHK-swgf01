@@ -113,6 +113,3 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
-
-
-
