@@ -2,7 +2,6 @@ from solutions.CHK import checkout_solution
 
 
 """
-Price table
 Our price table and offers: 
 +------+-------+------------------------+
 | Item | Price | Special offers         |
@@ -12,6 +11,7 @@ Our price table and offers:
 | C    | 20    |                        |
 | D    | 15    |                        |
 | E    | 40    | 2E get one B free      |
+| F    | 10    | 2F get one F free      |
 +------+-------+------------------------+
 
 
@@ -26,7 +26,7 @@ class TestCHK:
 
     def test_invalid_input(self):
         assert checkout_solution.checkout(1) == -1
-        assert checkout_solution.checkout('F') == -1
+        assert checkout_solution.checkout('G') == -1
         assert checkout_solution.checkout('a') == -1
 
     def test_individual_item(self):
@@ -35,6 +35,7 @@ class TestCHK:
         assert checkout_solution.checkout('C') == 20
         assert checkout_solution.checkout('D') == 15
         assert checkout_solution.checkout('E') == 40
+        assert checkout_solution.checkout('F') == 10
 
     def test_special_offer_individual(self):
         assert checkout_solution.checkout('AAA') == 130
