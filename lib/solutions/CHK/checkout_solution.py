@@ -28,7 +28,8 @@ price_table = {
     'B': 30,
     'C': 20,
     'D': 15,
-    'E': 40
+    'E': 40,
+    'F': 10
 }
 
 
@@ -103,3 +104,4 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
