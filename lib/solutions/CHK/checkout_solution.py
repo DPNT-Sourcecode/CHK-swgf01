@@ -60,6 +60,18 @@ class BuyXgetY(Offer):
         pass
 
 
+offers = sorted([Multiplicative('A', 1, 50),
+                 Multiplicative('A', 3, 130),
+                 Multiplicative('A', 5, 200),
+                 Multiplicative('B', 1, 30),
+                 Multiplicative('B', 2, 45),
+                 Multiplicative('C', 1, 20),
+                 Multiplicative('D', 1, 15),
+                 Multiplicative('A', 1, 40),
+                 BuyXgetY('E', 2, 'B', 1)], key=lambda o: o.discount)
+
+print(offers)
+
 def checkout(skus):
     try:
         # check input SKUs are present in the price_table
@@ -82,7 +94,3 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
-
-
-
-
