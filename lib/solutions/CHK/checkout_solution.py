@@ -25,6 +25,12 @@ from collections import namedtuple, defaultdict
 
 SKU = namedtuple('SKU', 'unit_price offer_multiplier offer_price')
 
+
+class Offer:
+    pass
+
+
+
 price_table = {
     'A': SKU(50, 3, 130),
     'B': SKU(30, 2, 45),
@@ -55,3 +61,4 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
