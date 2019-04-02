@@ -42,5 +42,3 @@ class TestCHK:
         assert checkout_solution.checkout("ABCD") == 50 + 30 + 20 + 10
         assert checkout_solution.checkout("ABACDA") == 130 + 30 + 20 + 10
         assert checkout_solution.checkout("AABBCC") == 50*2 + 45 + 20*2
-
-
