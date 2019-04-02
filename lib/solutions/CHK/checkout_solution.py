@@ -47,13 +47,20 @@ price_string = """| A    | 50    | 3A for 130, 5A for 200 |
 | X    | 90    |                        |
 | Y    | 10    |                        |
 | Z    | 50    |                        |"""
-price_table = {}
 
-for line in price_string.splitlines():
-    columns = line.split('|')
-    sku = columns[1].strip()
-    price = int(columns[2].strip())
-    price_table[sku] = price
+
+def make_pricetable(price_string):
+    price_table = {}
+    for line in price_string.splitlines():
+        columns = line.split('|')
+        sku = columns[1].strip()
+        price = int(columns[2].strip())
+        price_table[sku] = price
+    return price_table
+
+
+price_table = make_pricetable(price_string=price_string)
+
 
 class Offer:
     def __init__(self):
@@ -135,6 +142,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
