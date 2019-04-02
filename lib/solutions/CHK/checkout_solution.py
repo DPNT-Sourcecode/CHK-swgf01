@@ -1,23 +1,4 @@
-
-"""
-Our price table and offers:
-+------+-------+------------------------+
-| Item | Price | Special offers         |
-+------+-------+------------------------+
-| A    | 50    | 3A for 130, 5A for 200 |
-| B    | 30    | 2B for 45              |
-| C    | 20    |                        |
-| D    | 15    |                        |
-| E    | 40    | 2E get one B free      |
-+------+-------+------------------------+
-
-
-Notes:
- - The policy of the supermarket is to always favor the customer when applying special offers.
- - All the offers are well balanced so that they can be safely combined.
- - For any illegal input return -1
-"""
-
+import re
 # noinspection PyUnusedLocal
 # skus = unicode string
 
@@ -58,6 +39,15 @@ def make_pricetable(price_string):
         price_table[sku] = price
     return price_table
 
+
+def make_special_offers(price_string):
+    patternm = re.compile("(\d+)(.) for (\d+)")
+    patternb = re.compile(r"(\d)+(.) get one (.) free")
+
+    groups = patternm.match(price_string)
+    print(groups)
+
+make_special_offers(price_string)
 
 price_table = make_pricetable(price_string=price_string)
 
@@ -142,6 +132,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
