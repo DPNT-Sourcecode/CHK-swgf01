@@ -39,14 +39,19 @@ class TestCHK:
     def test_special_offer_individual(self):
         assert checkout_solution.checkout('AAA') == 130
         assert checkout_solution.checkout('AAAA') == 130 + 50
+        assert checkout_solution.checkout("AAAAA") == 200
+        assert checkout_solution.checkout("AAAAAA") == 200 + 50
+        assert checkout_solution.checkout("AAAAAAA") == 200 + 50 * 2
+        assert checkout_solution.checkout("AAAAAAA") == 200 + 130
         assert checkout_solution.checkout('BB') == 45
+        assert checkout_solution.checkout('BBB') == 45 + 30
         assert checkout_solution.checkout('BBBB') == 90
-        assert checkout_solution.checkout("AAAAA") == 130 + 50*2
-        assert checkout_solution.checkout("AAAAAA") == 130*2
+
 
     def test_combined_sku(self):
-        assert checkout_solution.checkout("ABCD") == 50 + 30 + 20 + 15
+        assert checkout_solution.checkout("ABCDE") == 50 + 30 + 20 + 15 + 40
         assert checkout_solution.checkout("ABACDA") == 130 + 30 + 20 + 15
         assert checkout_solution.checkout("AABBCC") == 50*2 + 45 + 20*2
+
 
 
