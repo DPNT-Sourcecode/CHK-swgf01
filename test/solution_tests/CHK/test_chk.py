@@ -47,11 +47,13 @@ class TestCHK:
         assert checkout_solution.checkout('BBB') == 45 + 30
         assert checkout_solution.checkout('BBBB') == 90
 
-
     def test_combined_sku(self):
         assert checkout_solution.checkout("ABCDE") == 50 + 30 + 20 + 15 + 40
         assert checkout_solution.checkout("ABACDA") == 130 + 30 + 20 + 15
         assert checkout_solution.checkout("AABBCC") == 50*2 + 45 + 20*2
+
+    def test_e_offer(self):
+        assert checkout_solution.checkout("ABCDEE") == 50 + 30 + 20 + 15 + 40 * 2 - 30
 
 
 
