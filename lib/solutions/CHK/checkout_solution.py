@@ -53,7 +53,9 @@ price_string = \
 | Z    | 50    |                        |
 """
 
-price_table = [ line.strip().split('|') for line in price_string.splitlines()]
+price_table = [ column.strip()
+                for column in (line.split('|')
+                for line in price_string.splitlines())]
 
 print(price_table)
 
@@ -147,4 +149,5 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
