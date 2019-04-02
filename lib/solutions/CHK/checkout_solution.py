@@ -40,7 +40,17 @@ def checkout(skus):
                 return -1
             else:
                 sku_cnt[sku] += 1
+        total_price = 0
+        # Given number of individual items apply special offer and calculate
+        # items price
+        for sku, n in sku_cnt.items():
+            q, r = divmod(n, price_table[sku].offer_multiplier)
+            sku_total = q * price_table[sku].offer_price + \
+                        r * price_table[sku].unit_price
+            total_price += sku_total
+        return total_price
     except:
         # The skus must be iterable for valid input
         return -1
+
 
