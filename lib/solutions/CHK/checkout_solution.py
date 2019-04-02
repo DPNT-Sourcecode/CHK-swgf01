@@ -23,12 +23,16 @@ Notes:
 
 from collections import namedtuple, defaultdict
 
-SKU = namedtuple('SKU', 'unit_price offer_multiplier offer_price')
-
+price_table = {
+    'A': 50,
+    'B': 30,
+    'C': 20,
+    'D': 15,
+    'E': 40
+}
 
 class Offer:
-    def apply(self, sku_cnt):
-        return sku_cnt, 0
+    pass
 
 
 class Multiplicative(Offer):
@@ -36,17 +40,15 @@ class Multiplicative(Offer):
         self.sku = sku
         self.multiplier = multiplier
         self.price = price
+        self.discount
 
     def apply(self, cnt_sku):
         pass
 
-price_table = {
-    'A': SKU(50, 3, 130),
-    'B': SKU(30, 2, 45),
-    'C': SKU(20, 1, 20),
-    'D': SKU(15, 1, 15)
-}
-
+class BuyXgetY(Offer):
+    def __init__(self, sku_x, multiplier, sku_y, y_cnt):
+        self.sku = sku_x
+        self.multiplier = multiplier
 
 def checkout(skus):
     try:
@@ -70,5 +72,6 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
