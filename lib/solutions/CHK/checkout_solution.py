@@ -55,6 +55,13 @@ class Offer:
             total_price += price_table[s] * cnt
         self.discount = total_price - offer_price
 
+    def apply(self, sku_basket):
+        # Calculate how many times offer can be applied
+        n_times = min([sku_basket[sku] // cnt for sku, cnt in self.skus.items()])
+        for sku, cnt in self.skus.items():
+            sku_basket[sku] -= cnt * n_times
+        return sku_basket, self.price * n_times
+
     @classmethod
     def make_multiplicative(cls, sku, cnt, offer_price):
         return cls({sku: cnt}, offer_price)
@@ -150,5 +157,6 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
