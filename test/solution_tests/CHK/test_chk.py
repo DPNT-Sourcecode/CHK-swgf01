@@ -52,6 +52,15 @@ class TestCHK:
         mult = checkout_solution.Offer.make_multiplicative('A', 3, 130)
         assert mult.discount == 20
 
+    def test_offer_apply(self):
+        mult = checkout_solution.Offer.make_multiplicative('A', 3, 130)
+        basket = {
+            'A': 3
+        }
+        new_basket, price = mult.apply(basket)
+        assert new_basket['A'] == 0
+        assert price == 130
+
     def test_make_special_offers(self):
         offers = checkout_solution.make_special_offers(price_string)
         assert checkout_solution.Multiplicative('A', 3, 130) in offers
@@ -93,3 +102,4 @@ class TestCHK:
 
     def test_any_3(self):
         assert checkout_solution.checkout("STX") == 45
+
