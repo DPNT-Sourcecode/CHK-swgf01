@@ -76,7 +76,12 @@ class Offer:
 
 
 def make_combination_offer(sku_list, n_comb, offer_price):
+    """
+    Returns list of offers
+    """
     combinations = itertools.combinations_with_replacement(sku_list, n_comb)
+    sku_counters = [Counter(combination) for combination in combinations]
+    return [ Offer(counter) for counter in sku_counters ]
 
 
 class Multiplicative(Offer):
@@ -170,4 +175,5 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
