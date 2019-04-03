@@ -1,12 +1,7 @@
 from solutions.CHK import checkout_solution
 
 
-"""
-Our price table and offers: 
-+------+-------+------------------------+
-| Item | Price | Special offers         |
-+------+-------+------------------------+
-| A    | 50    | 3A for 130, 5A for 200 |
+price_string = """| A    | 50    | 3A for 130, 5A for 200 |
 | B    | 30    | 2B for 45              |
 | C    | 20    |                        |
 | D    | 15    |                        |
@@ -31,18 +26,12 @@ Our price table and offers:
 | W    | 20    |                        |
 | X    | 90    |                        |
 | Y    | 10    |                        |
-| Z    | 50    |                        |
-+------+-------+------------------------+
-
-
-Notes: 
- - The policy of the supermarket is to always favor the customer when applying special offers.
- - All the offers are well balanced so that they can be safely combined.
- - For any illegal input return -1
-"""
+| Z    | 50    |                        |"""
 
 
 class TestCHK:
+
+    def test_make_price_table
 
     def test_invalid_input(self):
         assert checkout_solution.checkout(1) == -1
@@ -75,3 +64,4 @@ class TestCHK:
 
     def test_e_offer(self):
         assert checkout_solution.checkout("ABCDEE") == 50 + 30 + 20 + 15 + 40 * 2 - 30
+

@@ -125,13 +125,14 @@ def checkout(skus):
         total_price = 0
         # Given number of individual items apply offers and calculate
         # items price
-        for offer in sorted(offers, key=lambda o: o.discount):
+        for offer in sorted(offers, key=lambda o: o.discount, reverse=True):
             sku_cnt, price = offer.apply(sku_cnt)
             total_price += price
         return total_price
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
