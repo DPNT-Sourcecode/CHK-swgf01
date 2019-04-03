@@ -108,39 +108,10 @@ class Multiplicative(Offer):
                self.offer_price == other.offer_price
 
 
-class BuyXgetY(Offer):
-    def __init__(self, sku_x, multiplier, sku_y, y_cnt):
-        self.sku = sku_x
-        self.multiplier = multiplier
-        self.sku_y = sku_y
-        self.y_cnt = y_cnt
-        self.discount = price_table[sku_y] * y_cnt
-
-    def apply(self, cnt_sku):
-        q, r = divmod(cnt_sku[self.sku], self.multiplier)
-        applied_times = min(q, cnt_sku[self.sku_y])
-        price_so_far = applied_times * self.multiplier * price_table[self.sku]
-        cnt_sku[self.sku] -= applied_times * self.multiplier
-        cnt_sku[self.sku_y] -= applied_times * self.y_cnt
-        return cnt_sku, price_so_far
-
-    def __eq__(self, other):
-        return self.sku == other.sku and\
-               self.multiplier == other.multiplier and\
-               self.sku_y == other.sku_y and\
-               self.y_cnt == other.y_cnt
-
-
-class BuyXgetX(Multiplicative):
-    def __init__(self, sku, multiplier, cnt):
-        new_multiplier = multiplier + cnt
-        offer_price = multiplier * price_table[sku]
-        super(BuyXgetX, self).__init__(sku, new_multiplier, offer_price)
-
-
 def make_special_offers(price_string):
     patternm = re.compile(r"(\d+)(.) for (\d+)")
     patternb = re.compile(r"(\d+)(.) get one (.) free")
+    patternc = re.compile(r"buy any (\d+) of \((.(,.)*)\) for (\d+)")
 
     groupsm = patternm.findall(price_string)
     offers = [Multiplicative(group[1], int(group[0]), int(group[2]))
@@ -180,6 +151,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
