@@ -89,40 +89,19 @@ def make_combination_offer(sku_list, n_comb, offer_price):
     return [Offer(counter, offer_price) for counter in sku_counters ]
 
 
-class Multiplicative(Offer):
-    def __init__(self, sku, multiplier, offer_price):
-        self.sku = sku
-        self.multiplier = multiplier
-        self.offer_price = offer_price
-        self.discount = price_table[sku] * multiplier - offer_price
-
-    def apply(self, cnt_sku):
-        q, r = divmod(cnt_sku[self.sku], self.multiplier)
-        price_so_far = q * self.offer_price
-        cnt_sku[self.sku] = r
-        return cnt_sku, price_so_far
-
-    def __eq__(self, other):
-        return self.sku == other.sku and\
-               self.multiplier == other.multiplier and\
-               self.offer_price == other.offer_price
-
-
 def make_special_offers(price_string):
     patternm = re.compile(r"(\d+)(.) for (\d+)")
     patternb = re.compile(r"(\d+)(.) get one (.) free")
     patternc = re.compile(r"buy any (\d+) of \((.(,.)*)\) for (\d+)")
 
     groupsm = patternm.findall(price_string)
-    offers = [Multiplicative(group[1], int(group[0]), int(group[2]))
+    offers = [Offer.make_multiplicative(group[1], int(group[0]), int(group[2]))
               for group in groupsm]
     groupsb = patternb.findall(price_string)
     for group in groupsb:
-        if group[1] == group[2]:
-            offers.append(BuyXgetX(group[1], int(group[0]), 1))
-        else:
-            offers.append(BuyXgetY(group[1], int(group[0]),group[2],1))
-    return offers
+        offers.append(Offer.make_buy_x_get_y(group[1], int(group[0]), group[2], 1))
+    groupsc = patternc.findall(price_string)
+    print(groupsc)
 
 
 offers = make_special_offers(price_string)
@@ -151,6 +130,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
