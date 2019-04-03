@@ -1,6 +1,6 @@
 import re
-
-from collections import defaultdict
+import itertools
+from collections import defaultdict, Counter
 # noinspection PyUnusedLocal
 # skus = unicode string
 
@@ -73,6 +73,10 @@ class Offer:
             return cls({sku_x: x_cnt + y_cnt}, offer_price)
         else:
             return cls({sku_x: x_cnt, sku_y: y_cnt}, offer_price)
+
+
+def make_combination_offer(sku_list, n_comb, offer_price):
+    combinations = itertools.combinations_with_replacement(sku_list, n_comb)
 
 
 class Multiplicative(Offer):
@@ -166,3 +170,4 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
