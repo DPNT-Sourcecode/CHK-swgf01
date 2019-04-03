@@ -4,7 +4,7 @@ from solutions.CHK import checkout_solution
 price_string = """| A    | 50    | 3A for 130, 5A for 200 |
 | B    | 30    | 2B for 45              |
 | C    | 20    |                        |
-| D    | 15    |                        |
+| D    | 15    | 2D get one D free      |
 | E    | 40    | 2E get one B free      |"""
 
 
@@ -23,7 +23,8 @@ class TestCHK:
     def test_make_special_offers(self):
         offers = checkout_solution.make_special_offers(price_string)
         assert checkout_solution.Multiplicative('A', 3, 130) in offers
-        assert checkout_solution.BuyYgetX('E', 2, 'B', 1) in offers
+        assert checkout_solution.BuyXgetY('E', 2, 'B', 1) in offers
+        assert checkout_solution.BuyXgetX('D', 2, 1) in offers
 
 
     def test_invalid_input(self):
@@ -57,5 +58,6 @@ class TestCHK:
 
     def test_e_offer(self):
         assert checkout_solution.checkout("ABCDEE") == 50 + 30 + 20 + 15 + 40 * 2 - 30
+
 
 
