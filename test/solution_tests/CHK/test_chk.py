@@ -80,14 +80,6 @@ class TestCHK:
         assert checkout_solution.Offer({'S': 1, 'X': 1, 'Y': 1}, 45) in offers
 
 
-
-    def test_make_special_offers(self):
-        offers = checkout_solution.make_special_offers(price_string)
-        assert checkout_solution.Multiplicative('A', 3, 130) in offers
-        assert checkout_solution.BuyXgetY('E', 2, 'B', 1) in offers
-        assert checkout_solution.BuyXgetX('D', 2, 1) in offers
-
-
     def test_invalid_input(self):
         assert checkout_solution.checkout(1) == -1
         assert checkout_solution.checkout('a') == -1
@@ -122,4 +114,5 @@ class TestCHK:
 
     def test_any_3(self):
         assert checkout_solution.checkout("STX") == 45
+
 
