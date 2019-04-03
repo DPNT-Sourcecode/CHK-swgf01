@@ -69,6 +69,11 @@ class TestCHK:
         assert new_basket['A'] == 0
         assert price == 130
 
+    def test_combination_offer_maker(self):
+        offers = checkout_solution.make_combination_offer(['S', 'T', 'X', 'Y', 'Z'])
+
+
+
     def test_make_special_offers(self):
         offers = checkout_solution.make_special_offers(price_string)
         assert checkout_solution.Multiplicative('A', 3, 130) in offers

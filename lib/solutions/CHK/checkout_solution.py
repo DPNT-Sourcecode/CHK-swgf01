@@ -62,6 +62,11 @@ class Offer:
             sku_basket[sku] -= cnt * n_times
         return sku_basket, self.price * n_times
 
+    def __eq__(self, other):
+        return self.skus == other.skus and\
+               self.price == other.price and\
+               self.discount == other.discount
+
     @classmethod
     def make_multiplicative(cls, sku, cnt, offer_price):
         return cls({sku: cnt}, offer_price)
@@ -175,5 +180,6 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
