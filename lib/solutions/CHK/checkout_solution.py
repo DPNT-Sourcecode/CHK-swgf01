@@ -69,12 +69,11 @@ class Offer:
     @classmethod
     def make_buy_x_get_y(cls, sku_x, x_cnt, sku_y, y_cnt):
         offer_price = price_table[sku_x] * x_cnt
-        return cls({sku_x: x_cnt, sku_y: y_cnt}, offer_price)
+        if sku_x == sku_y:
+            return cls({sku_x: x_cnt + y_cnt}, offer_price)
+        else:
+            return cls({sku_x: x_cnt, sku_y: y_cnt}, offer_price)
 
-    @classmethod
-    def make_buy_x_get_x(cls, sku_x, x_cnt, free_x_cnt):
-        offer_price = price_table[sku_x] * x_cnt
-        return cls({sku_x: x_cnt + free_x_cnt}, offer_price)
 
 class Multiplicative(Offer):
     def __init__(self, sku, multiplier, offer_price):
@@ -167,10 +166,3 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
-
-
-
-
-
-
-

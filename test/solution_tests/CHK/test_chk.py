@@ -57,7 +57,7 @@ class TestCHK:
         assert xgety.discount == 30
 
     def test_offer_buy_x_get_x(self):
-        xgety = checkout_solution.Offer.make_buy_x_get_x('F', 2, 1)
+        xgety = checkout_solution.Offer.make_buy_x_get_y('F', 2, 'F', 1)
         assert xgety.discount == 10
 
     def test_offer_apply(self):
@@ -110,6 +110,3 @@ class TestCHK:
 
     def test_any_3(self):
         assert checkout_solution.checkout("STX") == 45
-
-
-
