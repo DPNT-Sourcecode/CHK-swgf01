@@ -33,7 +33,8 @@ price_string = """| A    | 50    | 3A for 130, 5A for 200 |
 | B    | 30    | 2B for 45              |
 | C    | 20    |                        |
 | D    | 15    | 2D get one D free      |
-| E    | 40    | 2E get one B free      |"""
+| E    | 40    | 2E get one B free      |
+| F    | 17    | buy any 2 of (B,C,D) for 25 |"""
 
 
 class TestCHK:
@@ -79,6 +80,14 @@ class TestCHK:
             ['S', 'T', 'X', 'Y', 'Z'], 3, 45)
         assert checkout_solution.Offer({'S': 1, 'X': 1, 'Y': 1}, 45) in offers
 
+    def test_make_simple_offer(self):
+        offers = checkout_solution.make_simple_offers({'A': 10, 'B': 20})
+        assert checkout_solution.Offer({'A': 1}, 10) in offers
+
+    def test_make_special_offer(self):
+        offers = checkout_solution.make_special_offers()
+        assert checkout_solution.Offer({'A': 1}, 10) in offers
+
     def test_invalid_input(self):
         assert checkout_solution.checkout(1) == -1
         assert checkout_solution.checkout('a') == -1
@@ -113,3 +122,4 @@ class TestCHK:
 
     def test_any_3(self):
         assert checkout_solution.checkout("STX") == 45
+
