@@ -109,10 +109,13 @@ def make_special_offers(price_string):
     return offers
 
 
-offers = make_special_offers(price_string)
+def make_simple_offers(price_table):
+    # Each entry in the price table must have x1 multiplicative offer
+    return [Offer.make_multiplicative(k, 1, v) for k, v in price_table.items()]
 
-for k, v in price_table.items():
-    offers.append(Offer.make_multiplicative(k, 1, v))
+
+offers = make_special_offers(price_string)
+offers.extend(make_simple_offers(price_table))
 
 
 def checkout(skus):
@@ -135,11 +138,3 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
-
-
-
-
-
-
-
-
