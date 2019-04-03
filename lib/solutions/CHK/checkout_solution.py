@@ -60,6 +60,11 @@ class Multiplicative(Offer):
         cnt_sku[self.sku] = r
         return cnt_sku, price_so_far
 
+    def __eq__(self, other):
+        return self.sku == other.sku and\
+               self.multiplier == other.multiplier and\
+               self.offer_price == other.offer_price
+
 
 class BuyXgetY(Offer):
     def __init__(self, sku_x, multiplier, sku_y, y_cnt):
@@ -76,6 +81,12 @@ class BuyXgetY(Offer):
         cnt_sku[self.sku] -= applied_times * self.multiplier
         cnt_sku[self.sku_y] -= applied_times * self.y_cnt
         return cnt_sku, price_so_far
+
+    def __eq__(self, other):
+        return self.sku == other.sku and\
+               self.multiplier == other.multiplier and\
+               self.sku_y == other.sku_y and\
+               self.y_cnt == other.y_cnt
 
 
 class BuyXgetX(Multiplicative):
@@ -127,6 +138,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
