@@ -41,11 +41,23 @@ def make_pricetable(price_string):
         price_table[sku] = price
     return price_table
 
+
 price_table = make_pricetable(price_string=price_string)
 
+
 class Offer:
-    def __init__(self):
-        self.discount = 0
+    def __init__(self, skus, offer_price):
+        self.skus = skus
+        self.price = offer_price
+        # Calculate discount
+        total_price = 0
+        for s, cnt in skus.items():
+            total_price += price_table[s] * cnt
+        self.discount = total_price - offer_price
+
+    @classmethod
+    def make_multiplicative(cls, sku, cnt, offer_price):
+        return cls({sku: cnt}, offer_price)
 
 class Multiplicative(Offer):
     def __init__(self, sku, multiplier, offer_price):
@@ -138,4 +150,5 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
