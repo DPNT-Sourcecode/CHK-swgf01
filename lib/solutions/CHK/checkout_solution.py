@@ -94,6 +94,7 @@ def make_special_offers(price_string):
     patternb = re.compile(r"(\d+)(.) get one (.) free")
 
     groupsm = patternm.findall(price_string)
+    print(groupsm)
     offers = [Multiplicative(group[1], int(group[0]), int(group[2]))
               for group in groupsm]
     groupsb = patternb.findall(price_string)
@@ -132,5 +133,6 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
