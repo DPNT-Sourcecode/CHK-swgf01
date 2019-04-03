@@ -46,7 +46,6 @@ class TestCHK:
 
     def test_invalid_input(self):
         assert checkout_solution.checkout(1) == -1
-        assert checkout_solution.checkout('G') == -1
         assert checkout_solution.checkout('a') == -1
 
     def test_individual_item(self):
