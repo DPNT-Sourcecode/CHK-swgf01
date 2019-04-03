@@ -79,7 +79,6 @@ class TestCHK:
             ['S', 'T', 'X', 'Y', 'Z'], 3, 45)
         assert checkout_solution.Offer({'S': 1, 'X': 1, 'Y': 1}, 45) in offers
 
-
     def test_invalid_input(self):
         assert checkout_solution.checkout(1) == -1
         assert checkout_solution.checkout('a') == -1
@@ -114,5 +113,6 @@ class TestCHK:
 
     def test_any_3(self):
         assert checkout_solution.checkout("STX") == 45
+
 
 

@@ -101,7 +101,12 @@ def make_special_offers(price_string):
     for group in groupsb:
         offers.append(Offer.make_buy_x_get_y(group[1], int(group[0]), group[2], 1))
     groupsc = patternc.findall(price_string)
-    print(groupsc)
+    for group in set(groupsc):
+        offers.extend(make_combination_offer(
+            group[1].split(','),
+            int(group[0]),
+            int(group[3])))
+    return offers
 
 
 offers = make_special_offers(price_string)
@@ -130,6 +135,7 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
 
 
