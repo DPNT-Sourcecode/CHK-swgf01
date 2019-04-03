@@ -48,6 +48,11 @@ class TestCHK:
             'E': 40
         }
 
+    def test_offer_eq(self):
+        mult1 = checkout_solution.Offer.make_multiplicative('A', 3, 130)
+        mult2 = checkout_solution.Offer.make_multiplicative('A', 3, 130)
+        assert mult1 == mult2
+
     def test_offer_discount(self):
         mult = checkout_solution.Offer.make_multiplicative('A', 3, 130)
         assert mult.discount == 20
@@ -70,7 +75,9 @@ class TestCHK:
         assert price == 130
 
     def test_combination_offer_maker(self):
-        offers = checkout_solution.make_combination_offer(['S', 'T', 'X', 'Y', 'Z'])
+        offers = checkout_solution.make_combination_offer(
+            ['S', 'T', 'X', 'Y', 'Z'], 3, 45)
+        assert checkout_solution.Offer({'S': 1, 'X': 1, 'Y': 1}, 45) in offers
 
 
 
@@ -115,3 +122,4 @@ class TestCHK:
 
     def test_any_3(self):
         assert checkout_solution.checkout("STX") == 45
+
