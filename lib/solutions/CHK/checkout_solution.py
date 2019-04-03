@@ -39,17 +39,6 @@ def make_pricetable(price_string):
         price_table[sku] = price
     return price_table
 
-
-def make_special_offers(price_string):
-    patternm = re.compile(r"(\d+)(.) for (\d+)")
-    patternb = re.compile(r"(\d+)(.) get one (.) free")
-
-    groupsm = patternm.findall(price_string)
-    groupsb = patternb.findall(price_string)
-    print(groupsb)
-
-make_special_offers(price_string)
-
 price_table = make_pricetable(price_string=price_string)
 
 
@@ -99,6 +88,24 @@ class BuyXgetX(Multiplicative):
         super(BuyXgetX, self).__init__(sku, new_multiplier, offer_price)
 
 
+def make_special_offers(price_string):
+    patternm = re.compile(r"(\d+)(.) for (\d+)")
+    patternb = re.compile(r"(\d+)(.) get one (.) free")
+
+    groupsm = patternm.findall(price_string)
+    offers = [Multiplicative(group[1], int(group[0]), int(group[2]))
+              for group in groupsm]
+    groupsb = patternb.findall(price_string)
+    for group in groupsb:
+        if group[1] == group[2]:
+            offers.append(BuyXgetX(group[1], int(group[0]), 1))
+        else:
+            offers.append(BuyXgetY(group[1], int(group[0]),group[2],1))
+    return offers
+
+offers = make_special_offers(price_string)
+print(offers)
+
 offers = sorted([Multiplicative('A', 1, 50),
                  Multiplicative('A', 3, 130),
                  Multiplicative('A', 5, 200),
@@ -133,3 +140,4 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
