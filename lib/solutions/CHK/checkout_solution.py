@@ -1,4 +1,6 @@
 import re
+
+from collections import defaultdict
 # noinspection PyUnusedLocal
 # skus = unicode string
 
@@ -40,7 +42,6 @@ def make_pricetable(price_string):
     return price_table
 
 price_table = make_pricetable(price_string=price_string)
-
 
 class Offer:
     def __init__(self):
@@ -103,20 +104,11 @@ def make_special_offers(price_string):
             offers.append(BuyXgetY(group[1], int(group[0]),group[2],1))
     return offers
 
-offers = make_special_offers(price_string)
-print(offers)
 
-offers = sorted([Multiplicative('A', 1, 50),
-                 Multiplicative('A', 3, 130),
-                 Multiplicative('A', 5, 200),
-                 Multiplicative('B', 1, 30),
-                 Multiplicative('B', 2, 45),
-                 Multiplicative('C', 1, 20),
-                 Multiplicative('D', 1, 15),
-                 Multiplicative('E', 1, 40),
-                 BuyXgetY('E', 2, 'B', 1),
-                 Multiplicative('F', 1, 10),
-                 BuyXgetX('F', 2, 1)], key=lambda o: o.discount, reverse=True)
+offers = make_special_offers(price_string)
+
+for k, v in price_table.items():
+    offers.append(Multiplicative(k, 1, v))
 
 print(offers)
 
@@ -140,4 +132,5 @@ def checkout(skus):
     except:
         # The skus must be iterable for valid input
         return -1
+
 
